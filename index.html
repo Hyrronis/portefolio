@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Hyrronis Le Bognan">
+<meta property="og:description" content="Designer graphique et Digital Manager à Abidjan : ce que vous gagnez, des solutions par domaine et les réalisations.">
+<meta property="og:image" content="img/ada-affiche.webp">
+<title>Hyrronis Le Bognan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Le dossier de Hyrronis « Le Bognan », designer graphique et digital manager à Abidjan : ce que vous gagnez, des solutions par domaine et les réalisations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : un dossier client posé sur un bureau bleu pâle. La couverture s'ouvre au chargement,
+   chaque section est une feuille du dossier avec son intercalaire (onglet). Blanc et bleu uniquement. */
+:root{
+  --desk:#e9effa;      /* fond, bureau */
+  --paper:#ffffff;     /* feuilles */
+  --flap:#dce7ff;      /* intérieur de la chemise */
+  --blue:#1546e0;      /* bleu principal */
+  --blue-deep:#0b2a8f; /* couverture, titres forts */
+  --ink:#0c1633;       /* texte */
+  --muted:#56638a;     /* texte secondaire */
+  --line:#d3ddf1;      /* filets */
+  --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  --body:"Instrument Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--desk);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--paper)}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:1.02;margin:0;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.ref{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1.5px solid var(--blue);color:var(--blue);background:var(--paper);transition:background .15s,color .15s,transform .15s}
+.btn:hover{background:var(--blue);color:var(--paper)}
+.btn:active{transform:scale(.97)}
+.btn.solid{background:var(--blue);color:var(--paper)}
+.btn.solid:hover{background:var(--blue-deep);border-color:var(--blue-deep)}
+
+/* Barre d'onglets */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--paper);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;align-items:center;gap:16px;padding-block:10px}
+.brand{font-family:var(--display);font-weight:800;font-size:19px;text-decoration:none;color:var(--blue-deep);white-space:nowrap;margin-right:auto}
+.tablist{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tablist::-webkit-scrollbar{display:none}
+.tablist a{position:relative;font-size:14px;font-weight:500;text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:8px;white-space:nowrap;transition:color .15s,background .15s}
+.tablist a:hover{color:var(--ink);background:var(--desk)}
+.tablist a.on{color:var(--blue);background:var(--flap)}
+@media (max-width:820px){.tabs .btn{display:none}.brand{font-size:16px}}
+@media (max-width:560px){.tabs .wrap{flex-wrap:wrap;gap:4px 12px}.tablist{width:100%;margin:0 -4px}}
+
+/* Dossier d'ouverture */
+.folder-zone{padding-block:48px 24px}
+.folder{position:relative}
+.folder-tab{display:inline-flex;gap:14px;align-items:center;background:var(--blue-deep);color:var(--paper);padding:10px 22px 12px;border-radius:14px 14px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-left:28px}
+.folder-body{position:relative;perspective:2400px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);background:var(--blue-deep);border-radius:0 20px 20px 20px;padding:14px;gap:14px;box-shadow:0 40px 80px -40px rgba(11,42,143,.55)}
+.flap{background:var(--flap);border-radius:12px;padding:clamp(24px,4vw,48px);display:flex;flex-direction:column;gap:22px;position:relative}
+.flap h1{font-size:clamp(48px,7.4vw,96px);color:var(--blue-deep)}
+.flap h1 span{display:block;font-size:.42em;font-weight:500;color:var(--blue);letter-spacing:-.01em;margin-top:.25em}
+.flap .role{font-size:18px;color:var(--ink);max-width:28em}
+.promise{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.2vw,26px);line-height:1.25;color:var(--blue-deep);border-top:1.5px solid var(--blue);padding-top:18px;max-width:22em}
+.flap .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
+.clip{position:absolute;right:clamp(20px,3vw,36px);bottom:-30px;width:min(30%,150px);transform:rotate(4deg);box-shadow:0 16px 30px -12px rgba(12,22,51,.45);border:4px solid var(--paper)}
+.clip::before{content:"";position:absolute;top:-16px;left:50%;width:16px;height:44px;border:3px solid #8fa3cf;border-radius:10px;transform:translateX(-50%)}
+.sheet-wrap{position:relative}
+.sheet{background:var(--paper);border-radius:12px;padding:clamp(24px,4vw,44px);height:100%;display:flex;flex-direction:column;gap:20px}
+.sheet h2{font-size:clamp(26px,3vw,36px);color:var(--ink)}
+.toc{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--line)}
+.toc a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding-block:14px;border-bottom:1px solid var(--line);text-decoration:none}
+.toc b{font-family:var(--display);font-size:20px;font-weight:700;color:var(--blue-deep)}
+.toc span{grid-column:1;color:var(--muted);font-size:15px}
+.toc i{grid-row:1/3;grid-column:2;align-self:center;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--blue)}
+.toc a:hover b{color:var(--blue)}
+.facts{display:flex;flex-wrap:wrap;gap:16px 36px;margin-top:auto}
+.facts b{display:block;font-family:var(--display);font-size:38px;font-weight:800;color:var(--blue);line-height:1}
+.facts span{font-size:13px;color:var(--muted)}
+.cover{position:absolute;inset:0;z-index:3;border-radius:0 20px 20px 20px;background:var(--blue);transform-origin:0 50%;backface-visibility:hidden;display:none;flex-direction:column;justify-content:space-between;padding:clamp(24px,4vw,44px);color:var(--paper);box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+.cover .ref{color:rgba(255,255,255,.75)}
+.cover strong{font-family:var(--display);font-size:clamp(38px,6vw,84px);max-width:12em;line-height:1;letter-spacing:-.02em}
+.cover em{font-style:normal;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.5);padding:6px 12px;border-radius:999px;align-self:flex-start}
+@media (max-width:860px){.folder-body{grid-template-columns:1fr}.clip{display:none}.folder-tab{margin-left:16px}}
+
+/* Feuilles (sections) */
+.sheets{display:grid;gap:40px;padding-block:24px 64px}
+.page{position:relative}
+.divider{display:inline-flex;gap:12px;align-items:baseline;background:var(--paper);padding:10px 20px 8px;border-radius:12px 12px 0 0;margin-left:24px}
+.divider .ref{color:var(--blue)}
+.divider b{font-family:var(--display);font-size:15px;font-weight:700}
+.page-body{background:var(--paper);border-radius:0 20px 20px 20px;padding:clamp(24px,5vw,64px);box-shadow:0 1px 0 var(--line),0 30px 60px -45px rgba(12,22,51,.35)}
+.page-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px 48px;align-items:end;margin-bottom:44px}
+.page-head h2{font-size:clamp(36px,5.4vw,68px);color:var(--blue-deep)}
+.page-head p{color:var(--muted);font-size:18px;max-width:34em}
+@media (max-width:760px){.page-head{grid-template-columns:1fr;margin-bottom:28px}.divider{margin-left:12px}}
+
+/* Ce que vous gagnez */
+.gains{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0;border-top:1.5px solid var(--blue)}
+.gain{padding:26px 26px 30px 0;border-bottom:1px solid var(--line);display:grid;gap:10px;align-content:start}
+.gain h3{font-size:clamp(22px,2.2vw,27px);color:var(--ink)}
+.gain p{color:var(--muted)}
+.gain .proof{font-family:var(--mono);font-size:12px;color:var(--blue);letter-spacing:.02em}
+
+/* Solutions */
+.domains{display:grid;gap:14px}
+.domain{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--paper)}
+.domain summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 24px;align-items:center;padding:22px 26px}
+.domain summary::-webkit-details-marker{display:none}
+.domain summary h3{font-size:clamp(22px,2.6vw,30px);color:var(--blue-deep)}
+.domain summary p{grid-column:1;color:var(--muted)}
+.domain summary .tog{grid-row:1/3;grid-column:2;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--blue);position:relative;transition:background .2s,transform .3s var(--ease)}
+.domain summary .tog::before,.domain summary .tog::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1.5px;background:var(--blue);transform:translate(-50%,-50%)}
+.domain summary .tog::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .3s var(--ease)}
+.domain[open] summary .tog{background:var(--blue)}
+.domain[open] summary .tog::before,.domain[open] summary .tog::after{background:var(--paper)}
+.domain[open] summary .tog::after{transform:translate(-50%,-50%) rotate(0)}
+.domain summary:hover h3{color:var(--blue)}
+.domain-in{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,.9fr);gap:0;border-top:1px solid var(--line)}
+.col{padding:22px 26px;border-right:1px solid var(--line);display:grid;gap:10px;align-content:start}
+.col:last-child{border-right:0;background:var(--desk)}
+.col .ref{color:var(--blue)}
+.col ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.col li::marker{color:var(--blue)}
+.col img{border-radius:8px;width:100%;aspect-ratio:4/3;object-fit:cover}
+.col .gainline{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.2;color:var(--blue-deep)}
+@media (max-width:980px){.domain-in{grid-template-columns:1fr 1fr}.col:nth-child(2){border-right:0}.col:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media (max-width:600px){.domain-in{grid-template-columns:1fr}.col{border-right:0;border-bottom:1px solid var(--line)}.domain summary{padding:18px}.col{padding:18px}}
+
+/* Méthode */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;counter-reset:s}
+.step{padding:24px 24px 0 0;border-top:1.5px solid var(--line);display:grid;gap:8px;align-content:start;position:relative}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--mono);font-size:12px;color:var(--blue)}
+.step::after{content:"";position:absolute;top:-1.5px;left:0;height:1.5px;width:40px;background:var(--blue)}
+.step h3{font-size:22px}
+.step p{color:var(--muted)}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr;gap:28px 0}}
+@media (max-width:480px){.steps{grid-template-columns:1fr}}
+
+/* Réalisations */
+.case{padding-block:44px;border-top:1px solid var(--line)}
+.case:first-of-type{border-top:0;padding-top:0}
+.case-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 40px;align-items:end;margin-bottom:22px}
+.case-head h3{font-size:clamp(28px,3.6vw,44px);color:var(--ink);margin-top:8px}
+.case-head .ref{color:var(--blue)}
+.case-head p{color:var(--muted)}
+.case-head .won{margin-top:10px;color:var(--ink);font-weight:500}
+.case-head .won b{color:var(--blue)}
+@media (max-width:760px){.case-head{grid-template-columns:1fr}}
+.mosaic{display:grid;gap:10px;grid-template-columns:repeat(12,minmax(0,1fr))}
+.mosaic>button{grid-column:span 4}
+.mosaic .w3{grid-column:span 3}.mosaic .w5{grid-column:span 5}.mosaic .w6{grid-column:span 6}.mosaic .w7{grid-column:span 7}.mosaic .w8{grid-column:span 8}
+@media (max-width:720px){.mosaic{grid-auto-flow:dense;grid-template-columns:repeat(2,minmax(0,1fr))}.mosaic>button,.mosaic .w3,.mosaic .w5,.mosaic .w6{grid-column:span 1}.mosaic .w7,.mosaic .w8{grid-column:span 2}}
+.shot{padding:0;border:0;background:var(--desk);cursor:zoom-in;overflow:hidden;display:block;width:100%;border-radius:10px}
+.shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.shot:hover img{transform:scale(1.03)}
+.mosaic .shot{aspect-ratio:var(--r,4/5)}
+.more{margin-top:44px;padding-top:36px;border-top:1.5px solid var(--blue)}
+.more h3{font-size:clamp(26px,3vw,36px);color:var(--blue-deep)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-block:18px 24px}
+.filters button{font:inherit;font-size:14px;font-weight:500;padding:8px 16px;border-radius:999px;background:var(--paper);color:var(--muted);border:1px solid var(--line);cursor:pointer;transition:all .15s}
+.filters button:hover{border-color:var(--blue);color:var(--blue)}
+.filters button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:var(--paper)}
+.wall{columns:4 220px;column-gap:10px}
+.wall figure{margin:0 0 12px;break-inside:avoid}
+.wall figcaption{font-size:13px;color:var(--muted);padding:6px 2px 2px}
+.wall figcaption b{color:var(--ink);font-weight:600}
+
+/* Contact */
+.contact .page-body{background:var(--blue-deep);color:var(--paper)}
+.contact .divider{background:var(--blue-deep)}
+.contact .divider .ref{color:#9fb6ff}
+.contact .divider b{color:var(--paper)}
+.contact h2{font-size:clamp(40px,6vw,80px);color:var(--paper)}
+.contact .lead{color:#c8d5ff;font-size:18px;margin-top:18px;max-width:30em}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}
+.lines{display:grid;border-top:1px solid rgba(255,255,255,.2)}
+.line{display:grid;grid-template-columns:100px minmax(0,1fr) auto;gap:14px;align-items:center;padding-block:18px;border-bottom:1px solid rgba(255,255,255,.2)}
+.line .ref{color:#9fb6ff}
+.line .v{font-family:var(--display);font-weight:500;font-size:clamp(16px,1.6vw,21px);overflow-wrap:anywhere;user-select:all;min-width:0}
+.line .v a{text-decoration:none}
+.copy{font:inherit;font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;background:transparent;color:var(--paper);border:1px solid rgba(255,255,255,.4);cursor:pointer}
+.copy:hover{background:var(--paper);color:var(--blue-deep)}
+.contact .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.contact .btn{border-color:var(--paper);color:var(--paper);background:transparent}
+.contact .btn.solid{background:var(--paper);color:var(--blue-deep)}
+.contact .btn:hover{background:var(--paper);color:var(--blue-deep)}
+@media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+@media (max-width:480px){.line{grid-template-columns:1fr auto}.line .ref{grid-column:1/-1}}
+footer .wrap{padding-block:8px 40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted)}
+
+/* Visionneuse */
+dialog{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100%;height:100%;color:var(--paper)}
+dialog::backdrop{background:rgba(7,18,58,.92)}
+.lb{position:fixed;inset:0;display:grid;grid-template-rows:minmax(0,1fr) auto;padding:calc(64px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb .stage{display:flex;align-items:center;justify-content:center;min-height:0}
+.lb img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.lb .cap{text-align:center;padding-top:14px;font-size:14px;color:#c8d5ff}
+.lb .cap b{color:var(--paper);font-weight:600}
+.lb .ctl{font:inherit;position:absolute;background:var(--paper);border:0;color:var(--blue-deep);width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1}
+.lb .ctl:hover{background:var(--flap)}
+.lb .close{top:calc(10px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px))}
+.lb .prev{left:max(16px,env(safe-area-inset-left,0px));top:50%}
+.lb .next{right:max(16px,env(safe-area-inset-right,0px));top:50%}
+</style>
+</head>
+<body>
+
+
+<header class="tabs">
+  <div class="wrap">
+    <a class="brand" href="#dossier">Hyrronis Le Bognan</a>
+    <nav class="tablist" aria-label="Onglets du dossier">
+      <a href="#gains">Ce que vous gagnez</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#methode">Méthode</a>
+      <a href="#realisations">Réalisations</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn solid" href="https://wa.me/2250777778303" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
+<main>
+  <div class="folder-zone" id="dossier">
+    <div class="wrap">
+      <div class="folder">
+        <div class="folder-tab"><span>Dossier client</span><span>Réf. BD-2026</span></div>
+        <div class="folder-body">
+          <div class="flap" id="flap">
+            <p class="ref">Designer graphique &amp; Digital Manager · Abidjan</p>
+            <h1>Hyrronis<span>dit Le Bognan</span></h1>
+            <p class="promise">Comprendre vos besoins et vos attentes, puis dépasser vos espérances.</p>
+            <p class="role">J'aide les entreprises, les églises, les associations et les organisateurs ivoiriens à se faire remarquer, à se faire comprendre et à se faire choisir.</p>
+            <div class="actions">
+              <a class="btn solid" href="#gains">Ouvrir le dossier</a>
+              <a class="btn" href="#realisations">Voir les réalisations</a>
+            </div>
+          </div>
+          <div class="sheet-wrap">
+            <div class="sheet" id="sheet">
+              <p class="ref">Contenu du dossier</p>
+              <h2>Tout ce que vous devez savoir avant de me confier votre image</h2>
+              <ul class="toc">
+                <li><a href="#gains"><b>Ce que vous gagnez</b><span>Les bénéfices concrets pour votre activité</span><i>p. 1</i></a></li>
+                <li><a href="#solutions"><b>Solutions par domaine</b><span>Votre problème, ma réponse, ce que vous recevez</span><i>p. 2</i></a></li>
+                <li><a href="#methode"><b>Méthode</b><span>Comment on avance ensemble, étape par étape</span><i>p. 3</i></a></li>
+                <li><a href="#realisations"><b>Réalisations</b><span>60 visuels pour plus de 15 clients</span><i>p. 4</i></a></li>
+              </ul>
+              <div class="facts">
+                <div><b data-count="9">9</b><span>ans dans le digital</span></div>
+                <div><b data-count="15" data-suffix="+">15+</b><span>marques et événements</span></div>
+                <div><b data-count="60" data-suffix="+">60+</b><span>visuels livrés ici</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="cover" id="cover" aria-hidden="true">
+              <p class="ref">Bognan Digital · Dossier client</p>
+              <strong>Ce que vous gagnez en travaillant avec moi</strong>
+              <em>Confidentiel · à ouvrir</em>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap sheets">
+
+    <section class="page" id="gains">
+      <div class="divider"><span class="ref">p. 1</span><b>Ce que vous gagnez</b></div>
+      <div class="page-body">
+        <div class="page-head">
+          <h2>Ce que vous gagnez en travaillant avec moi</h2>
+          <p>Un beau visuel ne suffit pas. Ce qui compte, c'est ce qu'il change pour vous : plus de confiance, plus de monde, plus de ventes, et moins de temps perdu.</p>
+        </div>
+        <div class="gains">
+          <div class="gain"><h3>Une image qui inspire confiance</h3><p>Vos clients vous jugent en quelques secondes. Une identité nette et cohérente sur tous vos supports vous fait paraître solide et sérieux, même face à de plus grands concurrents.</p><p class="proof">Gueye Multiservice, Lunettes de Paris</p></div>
+          <div class="gain"><h3>Des événements qui se remplissent</h3><p>Je prépare le public avant le jour J : teasers, affiche officielle, cartes des invités, rappels. Les gens en parlent, partagent et viennent.</p><p class="proof">ADA 2026, Mary Sy en concert, MaraDAN</p></div>
+          <div class="gain"><h3>Des réseaux qui vous ramènent des clients</h3><p>Chaque publication a un but : informer, rassurer ou faire agir. Vos pages ne servent plus seulement à exister, elles envoient vers votre boutique ou votre WhatsApp.</p><p class="proof">Lunettes de Paris, Cabine en ligne</p></div>
+          <div class="gain"><h3>Un message enfin compris</h3><p>Assurance, programme d'église, offre complexe : je traduis votre message en mots simples et en images proches de votre public.</p><p class="proof">Caravane du SADA</p></div>
+          <div class="gain"><h3>Du temps et zéro stress</h3><p>Un seul interlocuteur, de l'idée aux fichiers prêts pour l'imprimeur et pour les réseaux. Vous validez, je m'occupe du reste, dans les délais.</p><p class="proof">Camp Biblique ACEEPCI : affiche, t-shirts, car</p></div>
+          <div class="gain"><h3>Quelqu'un qui connaît le terrain</h3><p>Neuf ans à Abidjan : je connais les codes des églises, des mariages traditionnels, du Mobile Money et des commerces de quartier. Vos visuels parlent à vos gens.</p><p class="proof">Temple Espérance, mariage Edwige &amp; Brice</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="solutions">
+      <div class="divider"><span class="ref">p. 2</span><b>Solutions par domaine</b></div>
+      <div class="page-body">
+        <div class="page-head">
+          <h2>Une solution pour chaque domaine</h2>
+          <p>Choisissez votre situation. Vous verrez le problème que je règle, ce que je fais, ce que vous recevez et un exemple réel.</p>
+        </div>
+        <div class="domains">
+
+          <details class="domain" open>
+            <summary><h3>Commerces et boutiques</h3><p>Opticiens, mode, cosmétiques, services de proximité</p><span class="tog" aria-hidden="true"></span></summary>
+            <div class="domain-in">
+              <div class="col"><p class="ref">Le problème</p><p>Votre page Facebook existe, mais elle ne vend pas. Les publications sont irrégulières et ne ressemblent pas à votre boutique.</p></div>
+              <div class="col"><p class="ref">Ma solution</p><p>Une ligne graphique fixe et un calendrier qui mélange produits, conseils et offres, avec un appel clair vers la boutique ou WhatsApp.</p></div>
+              <div class="col"><p class="ref">Vous recevez</p><ul><li>Charte pour les réseaux</li><li>Publications mensuelles aux bons formats</li><li>Visuels pour les publicités sponsorisées</li><li>Bannières de page</li></ul></div>
+              <div class="col"><img src="img/ldp-monture-t.webp" alt="Publication Lunettes de Paris" width="576" height="720" loading="lazy"><p class="gainline">Une vitrine ouverte 24 h sur 24</p><p class="ref">Exemple : Lunettes de Paris</p></div>
+            </div>
+          </details>
+
+          <details class="domain">
+            <summary><h3>Création et lancement de marque</h3><p>Nouvelles entreprises, marques de produits, cabinets</p><span class="tog" aria-hidden="true"></span></summary>
+            <div class="domain-in">
+              <div class="col"><p class="ref">Le problème</p><p>Vous lancez votre activité et partez de zéro. Sans logo ni couleurs, vous ressemblez à tout le monde.</p></div>
+              <div class="col"><p class="ref">Ma solution</p><p>Un logo pensé pour votre métier, puis ses déclinaisons sur vos vrais produits, pour présenter la marque avant même de produire.</p></div>
+              <div class="col"><p class="ref">Vous recevez</p><ul><li>Logo et variantes</li><li>Couleurs et typographies</li><li>Maquettes produits (sac, étiquette, flacon)</li><li>Fichiers pour l'imprimeur</li></ul></div>
+              <div class="col"><img src="img/gueye-parfum-t.webp" alt="Flacons de parfum Gueye" width="720" height="480" loading="lazy"><p class="gainline">Une marque prête à être vendue</p><p class="ref">Exemple : Gueye Multiservice</p></div>
+            </div>
+          </details>
+
+          <details class="domain">
+            <summary><h3>Concerts, conférences et événements</h3><p>Organisateurs, artistes, agences événementielles</p><span class="tog" aria-hidden="true"></span></summary>
+            <div class="domain-in">
+              <div class="col"><p class="ref">Le problème</p><p>Le public découvre l'événement trop tard, les visuels changent de style d'une semaine à l'autre et la salle reste à moitié vide.</p></div>
+              <div class="col"><p class="ref">Ma solution</p><p>Une campagne en trois temps : teasers pour créer l'attente, affiche officielle et cartes des invités, puis rappels jusqu'au jour J.</p></div>
+              <div class="col"><p class="ref">Vous recevez</p><ul><li>Teasers et affiche principale</li><li>Cartes pour chaque invité</li><li>Billets et visuels de vente</li><li>Photocall, roll-up, bannières</li></ul></div>
+              <div class="col"><img src="img/ada-mur-t.webp" alt="Mur de stars ADA 2026" width="720" height="476" loading="lazy"><p class="gainline">Un événement dont on parle avant qu'il commence</p><p class="ref">Exemple : ADA 2026</p></div>
+            </div>
+          </details>
+
+          <details class="domain">
+            <summary><h3>Églises et associations</h3><p>Paroisses, mouvements de jeunesse, camps, missions</p><span class="tog" aria-hidden="true"></span></summary>
+            <div class="domain-in">
+              <div class="col"><p class="ref">Le problème</p><p>Beaucoup d'activités, beaucoup d'informations, et des fidèles ou des membres qui ne retiennent rien.</p></div>
+              <div class="col"><p class="ref">Ma solution</p><p>Un univers par thème ou par saison, des programmes faciles à lire et des supports qui rassemblent : t-shirts, car, fonds de scène.</p></div>
+              <div class="col"><p class="ref">Vous recevez</p><ul><li>Logo du thème de l'année</li><li>Programmes et affiches</li><li>Verset ou message de la semaine</li><li>T-shirts et habillage de véhicule</li></ul></div>
+              <div class="col"><img src="img/camp-car-t.webp" alt="Car habillé du Camp Biblique National" width="720" height="450" loading="lazy"><p class="gainline">Une communauté qui se reconnaît et se mobilise</p><p class="ref">Exemple : Camp Biblique ACEEPCI</p></div>
+            </div>
+          </details>
+
+          <details class="domain">
+            <summary><h3>Institutions et sensibilisation</h3><p>Assurances, mairies, ONG, campagnes publiques</p><span class="tog" aria-hidden="true"></span></summary>
+            <div class="domain-in">
+              <div class="col"><p class="ref">Le problème</p><p>Votre sujet est important mais compliqué, et le public décroche dès qu'il voit du jargon.</p></div>
+              <div class="col"><p class="ref">Ma solution</p><p>Des phrases courtes, des visages qui ressemblent au public et une série de publications qui explique pas à pas, jusqu'à l'action sur le terrain.</p></div>
+              <div class="col"><p class="ref">Vous recevez</p><ul><li>Affiche de campagne</li><li>Série pédagogique pour les réseaux</li><li>Appel à réserver ou à participer</li><li>Supports pour stands et caravanes</li></ul></div>
+              <div class="col"><img src="img/sada-simple-t.webp" alt="L'assurance expliquée simplement" width="720" height="720" loading="lazy"><p class="gainline">Un public qui comprend, puis qui agit</p><p class="ref">Exemple : Caravane du SADA</p></div>
+            </div>
+          </details>
+
+          <details class="domain">
+            <summary><h3>Mariages et événements privés</h3><p>Mariages civils et traditionnels, anniversaires, cérémonies</p><span class="tog" aria-hidden="true"></span></summary>
+            <div class="domain-in">
+              <div class="col"><p class="ref">Le problème</p><p>Le grand jour approche et rien n'est coordonné : l'accueil, la scène et les invitations ont chacun leur style.</p></div>
+              <div class="col"><p class="ref">Ma solution</p><p>Une seule histoire visuelle pour le couple, de l'invitation au fond de scène, avec vos photos et vos traditions.</p></div>
+              <div class="col"><p class="ref">Vous recevez</p><ul><li>Affiche de bienvenue</li><li>Fond de scène</li><li>Visuels d'annonce</li><li>Fichiers grand format</li></ul></div>
+              <div class="col"><img src="img/mariage-scene-t.webp" alt="Fond de scène du mariage Edwige et Brice" width="720" height="600" loading="lazy"><p class="gainline">Des souvenirs aussi beaux que la fête</p><p class="ref">Exemple : Edwige &amp; Brice</p></div>
+            </div>
+          </details>
+
+          <details class="domain">
+            <summary><h3>Former vos équipes</h3><p>Avec Bognan Digital Academy</p><span class="tog" aria-hidden="true"></span></summary>
+            <div class="domain-in">
+              <div class="col"><p class="ref">Le problème</p><p>Vous voulez gérer vos réseaux en interne, mais votre équipe ne sait pas par où commencer.</p></div>
+              <div class="col"><p class="ref">Ma solution</p><p>Une formation pratique de Digital Manager et community manager, avec des exemples ivoiriens et des outils utilisables dès le lendemain.</p></div>
+              <div class="col"><p class="ref">Vous recevez</p><ul><li>Formation sur mesure</li><li>Manuel « Digital Manager Masterclass »</li><li>Modèles de calendrier et de publications</li></ul></div>
+              <div class="col"><p class="gainline">Une équipe autonome qui garde votre ligne</p><p class="ref">Bognan Digital Academy</p></div>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="methode">
+      <div class="divider"><span class="ref">p. 3</span><b>Méthode</b></div>
+      <div class="page-body">
+        <div class="page-head">
+          <h2>Comment on avance ensemble</h2>
+          <p>Quatre étapes simples. Vous savez toujours où on en est et ce qui vient ensuite.</p>
+        </div>
+        <div class="steps">
+          <div class="step"><h3>J'écoute</h3><p>Un échange sur WhatsApp ou en rendez-vous : votre public, votre objectif, votre budget et votre date limite.</p></div>
+          <div class="step"><h3>Je propose</h3><p>Une piste claire avec ce qui sera livré, le délai et le prix. Pas de surprise ensuite.</p></div>
+          <div class="step"><h3>Je crée</h3><p>Je vous présente les premiers visuels et j'ajuste avec vous jusqu'à ce que ce soit juste.</p></div>
+          <div class="step"><h3>Je livre et je suis</h3><p>Fichiers prêts pour l'imprimeur et les réseaux, et un conseil sur la meilleure façon de les publier.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="realisations">
+      <div class="divider"><span class="ref">p. 4</span><b>Réalisations</b></div>
+      <div class="page-body">
+        <div class="page-head">
+          <h2>Les réalisations</h2>
+          <p>Cinq projets en détail, puis le reste du portfolio. Touchez une image pour l'afficher en grand.</p>
+        </div>
+
+        <article class="case">
+          <div class="case-head">
+            <div><p class="ref">Adriel Group · Yopougon · 31 oct. 2026</p><h3>ADA 2026, Adoration des Adorateurs</h3></div>
+            <div><p>Campagne complète de la 3e édition : affiche principale, versions paysage et A3, cartes pour chaque chantre invité, bannières et mur de stars pour le photocall.</p><p class="won"><b>Gain pour le client :</b> un seul univers reconnaissable, du premier teaser jusqu'au photocall.</p></div>
+          </div>
+          <div class="mosaic">
+            <button class="shot w5" style="--r:3/4" data-full="img/ada-affiche.webp" data-cap="ADA 2026 · Affiche principale"><img src="img/ada-affiche-t.webp" alt="Affiche principale du concert ADA 2026" width="540" height="720" loading="lazy"></button>
+            <button class="shot w7" style="--r:7/5" data-full="img/ada-paysage.webp" data-cap="ADA 2026 · Affiche paysage"><img src="img/ada-paysage-t.webp" alt="Affiche paysage ADA 2026" width="720" height="513" loading="lazy"></button>
+            <button class="shot w6" style="--r:3/2" data-full="img/ada-mur.webp" data-cap="ADA 2026 · Mur de stars (photocall)"><img src="img/ada-mur-t.webp" alt="Mur de stars ADA 2026" width="720" height="476" loading="lazy"></button>
+            <button class="shot w3" style="--r:2/3" data-full="img/ada-king.webp" data-cap="ADA 2026 · Carte invité, King David"><img src="img/ada-king-t.webp" alt="Carte du chantre King David" width="497" height="720" loading="lazy"></button>
+            <button class="shot w3" style="--r:2/3" data-full="img/ada-annick.webp" data-cap="ADA 2026 · Carte invitée, Annick Kouamé"><img src="img/ada-annick-t.webp" alt="Carte de la chantre Annick Kouamé" width="497" height="720" loading="lazy"></button>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-head">
+            <div><p class="ref">OraSSu Groupe &amp; Mairie de Koumassi · Juil. 2026</p><h3>Caravane du SADA</h3></div>
+            <div><p>Campagne de vulgarisation de l'assurance pour le Salon Africain des Assurances : affiche de la caravane, appel à réserver un stand et série de publications pédagogiques.</p><p class="won"><b>Gain pour le client :</b> un sujet difficile rendu simple et proche du public de Koumassi.</p></div>
+          </div>
+          <div class="mosaic">
+            <button class="shot w8" style="--r:6/5" data-full="img/sada-affiche.webp" data-cap="Caravane du SADA · Affiche principale"><img src="img/sada-affiche-t.webp" alt="Affiche de la caravane du SADA" width="720" height="600" loading="lazy"></button>
+            <button class="shot" style="--r:4/5" data-full="img/sada-guinee.webp" data-cap="SADA Guinée 2026 · Publication"><img src="img/sada-guinee-t.webp" alt="Publication SADA Guinée 2026" width="576" height="720" loading="lazy"></button>
+            <button class="shot" style="--r:1/1" data-full="img/sada-stand.webp" data-cap="Caravane du SADA · Réservez votre stand"><img src="img/sada-stand-t.webp" alt="Réservez votre stand" width="720" height="720" loading="lazy"></button>
+            <button class="shot" style="--r:1/1" data-full="img/sada-salon.webp" data-cap="SADA · Développons la culture de l'assurance"><img src="img/sada-salon-t.webp" alt="Salon Africain des Assurances" width="720" height="720" loading="lazy"></button>
+            <button class="shot" style="--r:1/1" data-full="img/sada-parapluie.webp" data-cap="SADA · L'assurance, c'est comme un parapluie"><img src="img/sada-parapluie-t.webp" alt="L'assurance c'est comme un parapluie" width="720" height="720" loading="lazy"></button>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-head">
+            <div><p class="ref">ACEEPCI · 6 au 16 août 2026</p><h3>Camp Biblique National, « Engagé pour impacter »</h3></div>
+            <div><p>Univers du camp national des élèves et étudiants protestants : logo du thème, teasers « Bientôt », affiche, t-shirts et habillage du car.</p><p class="won"><b>Gain pour le client :</b> des participants fiers de porter les couleurs du camp, jusque sur la route.</p></div>
+          </div>
+          <div class="mosaic">
+            <button class="shot w7" style="--r:3/2" data-full="img/camp-affiche.webp" data-cap="Camp Biblique National · Affiche"><img src="img/camp-affiche-t.webp" alt="Affiche du Camp Biblique National" width="720" height="501" loading="lazy"></button>
+            <button class="shot w5" style="--r:5/4" data-full="img/camp-car.webp" data-cap="Camp Biblique National · Habillage du car"><img src="img/camp-car-t.webp" alt="Car habillé du camp" width="720" height="450" loading="lazy"></button>
+            <button class="shot w6" style="--r:4/3" data-full="img/camp-tshirt.webp" data-cap="Camp Biblique National · T-shirts"><img src="img/camp-tshirt-t.webp" alt="T-shirts Engagé pour impacter" width="720" height="540" loading="lazy"></button>
+            <button class="shot w3" style="--r:1/1" data-full="img/camp-teaser.webp" data-cap="Camp Biblique National · Teaser du thème"><img src="img/camp-teaser-t.webp" alt="Teaser du thème" width="720" height="720" loading="lazy"></button>
+            <button class="shot w3" style="--r:1/1" data-full="img/camp-teaser2.webp" data-cap="Camp Biblique National · Teaser du camp"><img src="img/camp-teaser2-t.webp" alt="Teaser du camp" width="720" height="720" loading="lazy"></button>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-head">
+            <div><p class="ref">Gueye Multiservice</p><h3>Une identité qui se porte</h3></div>
+            <div><p>Création du monogramme et présentation sur les produits de la marque : sac, maroquinerie, flacon de parfum, étiquette textile.</p><p class="won"><b>Gain pour le client :</b> une marque qui paraît établie dès son lancement.</p></div>
+          </div>
+          <div class="mosaic">
+            <button class="shot w8" style="--r:3/2" data-full="img/gueye-parfum.webp" data-cap="Gueye Multiservice · Flacons de parfum"><img src="img/gueye-parfum-t.webp" alt="Flacons de parfum Gueye" width="720" height="480" loading="lazy"></button>
+            <button class="shot" style="--r:3/4" data-full="img/gueye-sac.webp" data-cap="Gueye Multiservice · Sac en toile"><img src="img/gueye-sac-t.webp" alt="Sac en toile Gueye" width="720" height="480" loading="lazy"></button>
+            <button class="shot" style="--r:3/2" data-full="img/gueye-cuir.webp" data-cap="Gueye Multiservice · Maroquinerie"><img src="img/gueye-cuir-t.webp" alt="Portefeuille en cuir Gueye" width="720" height="473" loading="lazy"></button>
+            <button class="shot" style="--r:3/2" data-full="img/gueye-tissu.webp" data-cap="Gueye Multiservice · Logo embossé"><img src="img/gueye-tissu-t.webp" alt="Logo Gueye embossé" width="720" height="576" loading="lazy"></button>
+            <button class="shot" style="--r:3/2" data-full="img/gueye-etiquette.webp" data-cap="Gueye Multiservice · Étiquette textile"><img src="img/gueye-etiquette-t.webp" alt="Étiquette textile Gueye" width="720" height="480" loading="lazy"></button>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-head">
+            <div><p class="ref">Lunettes de Paris · Plateau &amp; Marcory</p><h3>Une vitrine sur les réseaux</h3></div>
+            <div><p>Publications pour un opticien abidjanais : nouveautés, conseils pour choisir sa monture et rendez-vous mensuels, dans une charte bleu, jaune et blanc.</p><p class="won"><b>Gain pour le client :</b> des clients qui arrivent en boutique en sachant déjà ce qu'ils veulent.</p></div>
+          </div>
+          <div class="mosaic">
+            <button class="shot w3" style="--r:4/5" data-full="img/ldp-regard.webp" data-cap="Lunettes de Paris · Un autre regard"><img src="img/ldp-regard-t.webp" alt="Un autre regard" width="576" height="720" loading="lazy"></button>
+            <button class="shot w3" style="--r:4/5" data-full="img/ldp-monture.webp" data-cap="Lunettes de Paris · Quelle monture choisir ?"><img src="img/ldp-monture-t.webp" alt="Quelle monture choisir" width="576" height="720" loading="lazy"></button>
+            <button class="shot w3" style="--r:4/5" data-full="img/ldp-henry.webp" data-cap="Lunettes de Paris · Henry Jullien"><img src="img/ldp-henry-t.webp" alt="Lunettes Henry Jullien" width="540" height="720" loading="lazy"></button>
+            <button class="shot w3" style="--r:4/5" data-full="img/ldp-lundi.webp" data-cap="Lunettes de Paris · Les lundis sont les meilleurs jours"><img src="img/ldp-lundi-t.webp" alt="Publication du lundi" width="720" height="720" loading="lazy"></button>
+          </div>
+        </article>
+
+        <div class="more">
+          <h3>Et aussi</h3>
+          <div class="filters" role="group" aria-label="Filtrer les réalisations" id="filters"></div>
+          <div class="wall" id="wall"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page contact" id="contact">
+      <div class="divider"><span class="ref">Dernière page</span><b>Contact</b></div>
+      <div class="page-body">
+        <div class="contact-grid">
+          <div>
+            <h2>Parlons de votre prochain projet</h2>
+            <p class="lead">Dites-moi ce que vous préparez, pour qui et pour quand. Je vous réponds avec une proposition claire : ce qui sera livré, le délai et le prix.</p>
+            <div class="actions">
+              <a class="btn solid" href="https://wa.me/2250777778303?text=Bonjour%20Hyrronis%2C%20j%27ai%20un%20projet%20%C3%A0%20vous%20pr%C3%A9senter." target="_blank" rel="noopener">Écrire sur WhatsApp</a>
+              <a class="btn" href="https://web.facebook.com/hyrronis.ouaide.9" target="_blank" rel="noopener">Facebook</a>
+            </div>
+          </div>
+          <div class="lines">
+            <div class="line"><span class="ref">WhatsApp</span><span class="v">+225 07 77 77 83 03</span><button class="copy" type="button" data-copy="+2250777778303">Copier</button></div>
+            <div class="line"><span class="ref">Email</span><span class="v">hyrronis@gmail.com</span><button class="copy" type="button" data-copy="hyrronis@gmail.com">Copier</button></div>
+            <div class="line"><span class="ref">Facebook</span><span class="v"><a href="https://web.facebook.com/hyrronis.ouaide.9" target="_blank" rel="noopener">Hyrronis Ouaide</a></span><button class="copy" type="button" data-copy="https://web.facebook.com/hyrronis.ouaide.9">Copier</button></div>
+            <div class="line"><span class="ref">Site</span><span class="v"><a href="https://bognandigital.com" target="_blank" rel="noopener">bognandigital.com</a></span><button class="copy" type="button" data-copy="https://bognandigital.com">Copier</button></div>
+            <div class="line"><span class="ref">Basé à</span><span class="v">Abidjan, Côte d'Ivoire</span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Hyrronis « Le Bognan » · Bognan Digital</span>
+    <span>Visuels réalisés pour leurs clients respectifs</span>
+  </div>
+</footer>
+
+<dialog id="lb" aria-label="Visionneuse">
+  <div class="lb">
+    <div class="stage"><img id="lb-img" alt=""></div>
+    <p class="cap" id="lb-cap"></p>
+    <button class="ctl close" type="button" id="lb-close" aria-label="Fermer">✕</button>
+    <button class="ctl prev" type="button" id="lb-prev" aria-label="Image précédente">‹</button>
+    <button class="ctl next" type="button" id="lb-next" aria-label="Image suivante">›</button>
+  </div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+<script>
+const WALL=[
+  ["marysy-affiche","Mary Sy en concert","Affiche principale","Événements",630,720],
+  ["marysy-tickets","Mary Sy en concert","Billets et livraison","Événements",720,720],
+  ["maradan-affiche","MaraDAN 2026","Marathon d'Abidjan Nord","Événements",720,558],
+  ["maradan-rollup","MaraDAN 2026","Roll-up","Événements",576,720],
+  ["maradan-tshirt","MaraDAN 2026","T-shirt coureur","Événements",576,720],
+  ["gloire-affiche","Ma Semaine de Gloire","Temple Espérance","Églises",576,720],
+  ["gloire-programme","Ma Semaine de Gloire","Programme des soirées","Églises",576,720],
+  ["gloire-aout","Temple Espérance","Programme du mois d'août","Églises",480,720],
+  ["verset","Paroles du Christ","Verset de la semaine","Églises",720,720],
+  ["missions-1","Festival des Missions","Bannière","Églises",720,349],
+  ["missions-logo","Festival des Missions","Logo","Identités",720,386],
+  ["mariage-scene","Mariage Edwige & Brice","Fond de scène","Mariages",720,600],
+  ["mariage-accueil","Mariage Edwige & Brice","Affiche de bienvenue","Mariages",439,720],
+  ["mariage-akparo","Akparo, Élodie & Emmanuel","Affiche de mariage","Mariages",440,720],
+  ["bia-couverture","Bia & Elie","Couverture, vêtements pour enfants","Identités",720,267],
+  ["bia-logo","Bia & Elie","Logo","Identités",551,551],
+  ["thyma-logo","Thyma","Monogramme","Identités",720,720],
+  ["thyma-banniere","Thyma","Bannière de collection","Identités",720,281],
+  ["kniise","Kniise","Logo, Knight Invest & Services","Identités",720,208],
+  ["kopi","KOPI","Logo","Identités",720,217,"svg"],
+  ["cabine","Cabine en ligne","Transferts Mobile Money","Réseaux sociaux",576,720],
+  ["cjdan","CJDAN Brunch","Jeunesses d'Abidjan Nord","Réseaux sociaux",576,720],
+  ["borae","Boraê","Publicité d'application","Réseaux sociaux",576,720],
+  ["ldp-novembre","Lunettes de Paris","Bon mois de novembre","Réseaux sociaux",720,720],
+  ["sada-simple","Caravane du SADA","L'assurance expliquée simplement","Réseaux sociaux",720,720],
+  ["ada-banniere","ADA 2026","Bannière","Événements",720,396],
+  ["ada-cherubins","ADA 2026","Groupe Les Chérubins","Événements",720,289],
+];
+const src=(w,full)=>w[6]==="svg"?"img/"+w[0]+".svg":"img/"+w[0]+(full?"":"-t")+".webp";
+const wall=document.getElementById("wall"), filters=document.getElementById("filters");
+const cats=["Tout",...new Set(WALL.map(w=>w[3]))];
+wall.innerHTML=WALL.map(w=>`<figure data-cat="${w[3]}"><button class="shot" type="button" data-full="${src(w,true)}" data-cap="${w[1]} · ${w[2]}"${w[6]==="svg"?' style="background:#fff;padding:12%;border:1px solid #d3ddf1"':""}><img src="${src(w)}" alt="${w[1]}, ${w[2]}" width="${w[4]}" height="${w[5]}" loading="lazy"></button><figcaption><b>${w[1]}</b> · ${w[2]}</figcaption></figure>`).join("");
+filters.innerHTML=cats.map((c,i)=>`<button type="button" id="f-${i}" aria-pressed="${i===0}" data-cat="${c}">${c}</button>`).join("");
+
+const M=window.Motion, still=matchMedia("(prefers-reduced-motion: reduce)").matches, anim=M&&!still;
+const ease=[.4,0,.2,1];
+
+filters.addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  filters.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  const shown=[];
+  wall.querySelectorAll("figure").forEach(f=>{const on=b.dataset.cat==="Tout"||f.dataset.cat===b.dataset.cat;f.hidden=!on;if(on)shown.push(f);});
+  if(anim) M.animate(shown,{opacity:[0,1],y:[16,0]},{duration:.35,delay:M.stagger(.03,{startDelay:0}),easing:ease});
+});
+
+/* Ouverture du dossier : la couverture pivote sur la reliure, l'intérieur apparaît derrière */
+if(anim){
+  const cover=document.getElementById("cover"), flap=document.getElementById("flap"), sheet=document.getElementById("sheet");
+  cover.style.display="flex";
+  [...flap.children,...sheet.children].forEach(x=>x.style.opacity=0);
+  M.animate([...flap.children],{opacity:[0,1],y:[18,0]},{duration:.5,delay:M.stagger(.06,{startDelay:1.1}),easing:ease});
+  M.animate([...sheet.children],{opacity:[0,1],y:[14,0]},{duration:.5,delay:M.stagger(.06,{startDelay:1.25}),easing:ease});
+  M.animate(cover,{rotateY:[0,-96],opacity:[1,1,0]},{duration:1.3,delay:.6,easing:[.65,0,.35,1]}).then(()=>{cover.style.display="none"});
+  M.animate(".folder-body",{boxShadow:["0 10px 30px -20px rgba(11,42,143,.4)","0 40px 80px -40px rgba(11,42,143,.55)"]},{duration:1.4,delay:.6});
+  /* Compteurs */
+  document.querySelectorAll("[data-count]").forEach(el=>{
+    const n=+el.dataset.count, s=el.dataset.suffix||"";
+    M.animate(0,n,{duration:1.2,delay:1.5,easing:[.2,0,0,1],onUpdate:v=>el.textContent=Math.round(v)+s});
+  });
+  /* Chaque feuille glisse en place comme une page qu'on pose */
+  M.inView(".page",({target})=>{
+    M.animate(target,{y:[60,0],rotate:[-1.2,0]},{duration:.6,easing:ease});
+    const items=target.querySelectorAll(".gain,.domain,.step,.case");
+    if(items.length) M.animate(items,{opacity:[0,1],y:[20,0]},{duration:.45,delay:M.stagger(.06,{startDelay:.15}),easing:ease});
+  },{amount:.08});
+  M.inView(".mosaic",({target})=>{M.animate(target.children,{opacity:[0,1],scale:[.96,1]},{duration:.45,delay:M.stagger(.05),easing:ease});},{amount:.2});
+  /* Ouverture fluide des solutions */
+  document.querySelectorAll(".domain").forEach(d=>d.addEventListener("toggle",()=>{
+    if(d.open) M.animate(d.querySelectorAll(".col"),{opacity:[0,1],y:[12,0]},{duration:.35,delay:M.stagger(.05),easing:ease});
+  }));
+}
+
+/* Onglet actif */
+const links=[...document.querySelectorAll(".tablist a")];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id));}}),{rootMargin:"-45% 0px -50% 0px"});
+document.querySelectorAll(".page").forEach(p=>io.observe(p));
+
+/* Visionneuse */
+const lb=document.getElementById("lb"), lbImg=document.getElementById("lb-img"), lbCap=document.getElementById("lb-cap");
+let list=[], idx=0;
+function show(i,dir){
+  idx=(i+list.length)%list.length; const s=list[idx], [t,d]=s.dataset.cap.split(" · ");
+  lbImg.src=s.dataset.full; lbImg.alt=s.dataset.cap;
+  lbCap.innerHTML="<b>"+t+"</b> · "+(d||"")+" ("+(idx+1)+"/"+list.length+")";
+  if(anim) M.animate(lbImg,{opacity:[0,1],x:[dir?dir*30:0,0],scale:dir?1:[.94,1]},{duration:.35,easing:ease});
+}
+document.addEventListener("click",e=>{
+  const s=e.target.closest(".shot"); if(!s) return;
+  list=[...document.querySelectorAll(".shot")].filter(x=>!x.closest("figure[hidden]"));
+  show(list.indexOf(s),0); if(!lb.open) lb.showModal();
+});
+document.getElementById("lb-close").onclick=()=>lb.close();
+document.getElementById("lb-prev").onclick=()=>show(idx-1,-1);
+document.getElementById("lb-next").onclick=()=>show(idx+1,1);
+lb.addEventListener("click",e=>{if(e.target.classList.contains("stage")||e.target.classList.contains("lb"))lb.close();});
+lb.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")show(idx-1,-1);if(e.key==="ArrowRight")show(idx+1,1);});
+
+document.querySelectorAll(".copy").forEach(b=>b.addEventListener("click",()=>{
+  const t=b.dataset.copy, done=()=>{b.textContent="Copié";setTimeout(()=>b.textContent="Copier",1800);};
+  try{navigator.clipboard.writeText(t).then(done,()=>sel(b));}catch(_){sel(b);}
+}));
+function sel(b){const v=b.previousElementSibling;const r=document.createRange();r.selectNodeContents(v);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Sélectionné";}
+</script>
+
+</body>
+</html>
